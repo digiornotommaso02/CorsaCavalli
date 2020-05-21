@@ -13,9 +13,8 @@ import java.awt.Graphics;
  */
 public class Circuito {
     	public void paint(Graphics g) {
-            g.setColor(Color.green);
+            g.setColor(Color.white);
             g.fillRect(0, 0, 0, 0);
-
             g.setColor(Color.white);
             g.fillRect(0, 0, 0, 0);
             g.fillRect(0, 0, 0, 0);
@@ -24,9 +23,8 @@ public class Circuito {
             g.fillRect(0, 0, 0, 0);
             g.fillRect(0, 0, 0, 0);
             g.fillRect(0, 0, 0, 0);
-
             g.fillRect(0, 0, 0, 0);
-            g.fillRect(0, 0, 5, 0);
+            g.fillRect(0, 0, 0, 0);
             g.fillRect(0, 0, 0, 0);
 	}
 }

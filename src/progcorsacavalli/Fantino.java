@@ -17,8 +17,11 @@ public class Fantino {
     int x;
     int y;
     Image immagine;
-
-	public Fantino(int yy, int xx) {
+    public void setCoordx(int n) {x = n;}
+    public int getCoordx() {return x;}
+    public void paint(Graphics g) {g.drawImage(immagine,  x,  y, null);}
+    
+    public Fantino(int yy, int xx) {
             x = 0;
             y = yy;
             setSize(0, 0);
@@ -54,13 +57,4 @@ public class Fantino {
 		try {mt.waitForID(1);} 
                 catch (Exception e) {}
 	}
-    public void setCoordx(int n) {
-		x = n;
-    }
-    public int getCoordx() {
-		return x;
-    }
-    public void paint(Graphics g) {
-		g.drawImage(immagine,  x,  y, null);
-    }
 }
