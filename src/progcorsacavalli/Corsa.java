@@ -10,38 +10,37 @@ package progcorsacavalli;
  * @author tommaso di giorno
  */
 public class Corsa implements Runnable{
-    Fantino fantino;
-    CorsaCavalli campo;
-    int velocita;
-    Thread thread;
-    int conta;
-    int posizione;
+   Fantino fantino;
+   ProgCorsaCavalli pista;
+   int velocita;
+   Thread thread;
+   int contatore;
+   int pos;
 	
-    public Corsa(Fantino f, CorsaCavalli c) {
+   public Corsa(Fantino f, ProgCorsaCavalli p) {
 	fantino = f;
-	campo = c;
-	conta=0;
-        velocita=2;
+	pista = p;
+	contatore = 0;
+        velocita = 1;
         thread = new Thread(this);
-	thread.start();
-	posizione=0;
-	}
-	
+        thread.start();
+	pos = 0;
+    }
+
     public void run() {
-	int dimImmagine=79;
-	int dimPista=960;
+	int dimensioneImmagine = 50;
+	int dimensionePista = 850;
 	//while((ciclista.))
-	while((fantino.getX() + dimImmagine) < dimPista) {
-	    if ((conta%10) == 0){
-		velocita = (int)(Math.random() * 4+1);
-		fantino.setX(fantino.getX() + velocita);
-		conta++;
-		    try {Thread.sleep(75);}
-		    catch (Exception e) {}
-		campo.repaint();
-            }
-        }	
-	posizione=campo.getPos();
-	campo.Arrivi();
+	while((fantino.getCoordinateX() + dimensioneImmagine) < dimensionePista) {
+	    if ((contatore%10) == 0)
+		velocita = (int)(Math.random() * 6 + 1);
+		fantino.setCoordinateX(fantino.getCoordinateX() + velocita);
+		contatore ++;
+		try {Thread.sleep(100);}
+		catch (Exception e) {}
+		pista.repaint();
+	}
+	pos = pista.getPos();
+	pista.verifica();
     }
 }
