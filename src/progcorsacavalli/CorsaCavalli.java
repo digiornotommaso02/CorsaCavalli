@@ -4,8 +4,17 @@
  * and open the template in the editor.
  */
 package progcorsacavalli;
-import java.awt.*;
-import javax.swing.*;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GridLayout;
+import java.awt.Image;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 /**
  *

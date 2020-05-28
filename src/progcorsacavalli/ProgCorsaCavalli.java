@@ -18,5 +18,4 @@ public class ProgCorsaCavalli {
         // TODO code application logic here
         CorsaCavalli corsa = new CorsaCavalli();
     }
-    
 }
