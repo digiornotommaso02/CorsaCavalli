@@ -14,27 +14,32 @@ import javax.swing.JPanel;
  * @author tommaso di giorno
  */
 public class Pista extends JPanel{
-    
+    /**
+     * Metodo che crea la pista
+     * @param g 
+     */
     public void paint(Graphics g) {
-	g.setColor(Color.gray);
-	g.fillRect(0, 0, 960, 545);
-	//Linee laterali
-	g.setColor(Color.black);
-        g.fillRect(0, 0, 10, 545);
-        g.fillRect(100, 0, 10, 545);
-	g.fillRect(0, 0, 950, 10);
-        g.fillRect(0, 50, 950, 10);
-	g.fillRect(0, 100, 950, 10);
-        g.fillRect(0, 150, 950, 10);
-	g.fillRect(0, 200, 950, 10);
-        g.fillRect(0, 250, 950, 10);
-	g.fillRect(0, 300, 950, 10);
-        g.fillRect(0, 350, 950, 10);
-	g.fillRect(0, 400, 950, 10);
-        g.fillRect(0, 450, 950, 10);
-	g.fillRect(0, 500, 950, 10);
-        // Traguardo
-        g.setColor(Color.white);
-	g.fillRect(850, 0, 5, 545);
+        //Sfondo
+	g.setColor(Color.gray);//Setta il colore dello sfondo
+	g.fillRect(0, 0, 1200, 700);// Grandezza sfondo (x, y, altezza, larghezza)
+	//Linee orizzontali
+	g.setColor(Color.black);//Setta il colore delle linee laterali
+	g.fillRect(0, 0, 1200, 5);
+        g.fillRect(0, 70, 1200, 5);
+	g.fillRect(0, 140, 1200, 5);
+        g.fillRect(0, 210, 1200, 5);
+	g.fillRect(0, 280, 1200, 5);
+        g.fillRect(0, 350, 1200, 5);
+	g.fillRect(0, 420, 1200, 5);
+        g.fillRect(0, 490, 1200, 5);
+	g.fillRect(0, 560, 1200, 5);
+        g.fillRect(0, 630, 1200, 5);
+	g.fillRect(0, 700, 1200, 5);
+        //Linee verticali
+        //Partenza
+        g.fillRect(100, 0, 5, 700);
+        //Traguardo
+        g.setColor(Color.white);//Setta il colore della linea del traguardo
+	g.fillRect(1100, 0, 5, 700);
 	}
 }

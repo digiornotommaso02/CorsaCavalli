@@ -12,6 +12,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.util.Scanner;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
@@ -22,89 +23,112 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
  */
 public class ProgCorsaCavalli extends JFrame{
     int pos;
-    Fantino[] fantini;
-    Corsa[] thread;
+    int num = 0;
+    Cavalli[] cavalli;
+    Cavallo[] thread;
     Pista pista;
     Graphics grafica;
-    Image immagine;
-
+    Image buffer;
+    /**
+     * Costruttore ProgCorsaCavalli
+     */
     public ProgCorsaCavalli() {
-	super("Gara Cavalli");
-	setSize(950, 545);
-	setLocation(50, 50);
-	setDefaultCloseOperation(EXIT_ON_CLOSE);
+	super("Corsa Cavalli");
+        while(num < 2 || num > 10){
+            Scanner input = new Scanner(System.in);
+            System.out.println("Scegli il numero di cavalli da far careggiare");
+            num = input.nextInt();//inserimento numero cavalli
+            if(num >= 11 || num <= 1){
+                System.out.println("Devi inserire un numero tra 2 e 10");
+            }
+        }
+	setSize(1200, 740);//setta la grandezza della finestra corsa cavalli(lunghezza, altezza)
+	setLocation(50, 0);//setta la posizione della finestra sullo schermo in base alle coordinate(x, y)
 	pista = new Pista();
-	fantini = new Fantino[5];
-	thread = new Corsa[5];
+	cavalli = new Cavalli[num];
+	thread = new Cavallo[num];
 	pos = 1;
-	int partenza = 1;
-	for (int xx=0; xx < 5; xx++) {
-	    fantini[xx] = new Fantino(partenza,  xx+1);
-       	    thread[xx] = new Corsa(fantini[xx], this);
-	    partenza = partenza + 100;			
+	int posIniziale = 0;
+	for (int x = 0; x < num; x++) {
+	    cavalli[x] = new Cavalli(posIniziale,  x + 1);
+       	    thread[x] = new Cavallo(cavalli[x], this);
+	    posIniziale = posIniziale + 70;			
 	}
 	this.add(pista);
 	setVisible(true);
     }
-    
+    /**
+     * Metodo che permette di ottenere la posizione
+     * @return 
+     */
     public synchronized int getPos() {
 	return pos++;
     }
-	
+    /**
+     * Metodo che verifica se i cavalli sono arrivati
+     */
     public synchronized void verifica() {
 	boolean arrivati = true;
-	for (int x = 0; x < 5; x++) {
+	for (int x = 0; x < num; x++) {
             if (thread[x].pos == 0) {
 	        arrivati = false;
 	    }
         }
 	if(arrivati) {
-            podio();
+            classifica();
 	}
     }
-	
-    public void podio() {
+    /**
+     * Metodo che permette di visualizzare la classifica
+     */
+    public void classifica() {
         JLabel[] cavalliArrivati;
-	cavalliArrivati = new JLabel[5];
+	cavalliArrivati = new JLabel[num];
 	JFrame classifica = new JFrame("Classifica");
-	classifica.setSize(450, 800);
-	classifica.setLocation(50, 50);
-	classifica.setBackground(Color.white);
-	classifica.setDefaultCloseOperation(EXIT_ON_CLOSE);
-	classifica.getContentPane().setLayout(new GridLayout(5,1 ));
-		
-	for(int x = 1; x < 6; x++) {
-	    for(int y = 0; y < 5; y++) {
+	classifica.setSize(500, 500);//setta la grandezza della finestra(lunghezza, altezza)
+	classifica.setLocation(50, 0);// setta la posizione della finestra sullo schermo in base alle coordinate(x, y)
+	classifica.setBackground(Color.white);//setta il colore dello sfondo della finestra
+	classifica.getContentPane().setLayout(new GridLayout(num,1 ));
+	for(int x = 1; x < num + 1; x++) {
+	    for(int y = 0; y < num; y++) {
 		if (thread[y].pos == x){
-		    cavalliArrivati[y]=new JLabel("Il " + x + "' cavallo classificato è in " + (y + 1)+"' corsia");
-		    cavalliArrivati[y].setFont(new Font("arial", Font.BOLD, 25));
-		    cavalliArrivati[y].setForeground(Color.black);
+		    cavalliArrivati[y]=new JLabel("Il " + x + "' cavallo classificato è in " + (y + 1)+ "' corsia");
+		    cavalliArrivati[y].setFont(new Font("arial", Font.BOLD, 25));//setta il font della scritta
+		    cavalliArrivati[y].setForeground(Color.black);//setta il colore della scritta
 		    classifica.getContentPane().add(cavalliArrivati[y]);
 		}
 	    }
 	}
-	classifica.setVisible(true);	
+	classifica.setVisible(true);//rende visibile la classifica
     }
-
+    /**
+     * Metodo che aggiorna la grafica
+     * @param g 
+     */
     public void update(Graphics g) {
 	paint(g);
     }
-	
+    /**
+     * Metodo che disegna la grafica
+     * @param g 
+     */
     public void paint(Graphics g) {
-	if (fantini != null) {
+	if (cavalli != null) {
 	    Graphics2D screen = (Graphics2D) g;
-	    immagine = createImage(950, 545);
-	    grafica = immagine.getGraphics();
-	    Dimension dim = getSize();
+	    buffer = createImage(1200, 700);
+	    grafica = buffer.getGraphics();
 	    pista.paint(grafica);
-	    for (int x = 0; x < 5; x++) {
-		fantini[x].paint(grafica);
+	    for (int x = 0; x < num; x++) {
+		cavalli[x].paint(grafica);
 	    }
-	    screen.drawImage(immagine, 0, 30, null);
+	    screen.drawImage(buffer, 0, 30, this);
 	    grafica.dispose();
 	}
     }
-
+    /**
+     * Metodo main
+     * @param a 
+     */
     public static void main(String[] a) {
 	ProgCorsaCavalli corsa = new ProgCorsaCavalli();
     }

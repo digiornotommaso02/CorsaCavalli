@@ -15,20 +15,23 @@ import javax.swing.JPanel;
  *
  * @author tommaso di giorno
  */
-public class Fantino extends JPanel{
+public class Cavalli extends JPanel{
     int coordinateX;
     int coordinateY;
     Image immagine;
-
-    public Fantino (int y, int x) {
+    /**
+     * Costruttore Cavalli
+     * @param y
+     * @param x 
+     */
+    public Cavalli (int y, int x) {
 	coordinateX = 0;
 	coordinateY = y;
-	setSize(80, 81);
 	Toolkit toolkit = Toolkit.getDefaultToolkit();
 
 	switch (x) {
 	case 1: {
-	    immagine = toolkit.getImage("ImmagineCavalli/cavallo.gif");
+	    immagine = toolkit.getImage("ImmagineCavalli/cavallo.gif");//ottiene l'immagine attraverso l'url
 	    break;
 	}
 	case 2: {
@@ -47,22 +50,51 @@ public class Fantino extends JPanel{
 	    immagine = toolkit.getImage("ImmagineCavalli/cavallo.gif");
 	    break;
 	}
+        case 6: {
+	    immagine = toolkit.getImage("ImmagineCavalli/cavallo.gif");
+	    break;
+	}
+        case 7: {
+	    immagine = toolkit.getImage("ImmagineCavalli/cavallo.gif");
+	    break;
+	}
+        case 8: {
+	    immagine = toolkit.getImage("ImmagineCavalli/cavallo.gif");
+	    break;
+	}
+        case 9: {
+	    immagine = toolkit.getImage("ImmagineCavalli/cavallo.gif");
+	    break;
+	}
+        case 10: {
+	    immagine = toolkit.getImage("ImmagineCavalli/cavallo.gif");
+	    break;
+	}
 	}
         MediaTracker mediatracker = new MediaTracker(this);
         mediatracker.addImage(immagine, 1);
         try {mediatracker.waitForID(1);} 
         catch (Exception e) {}
     }
-	
+    /**
+     * Metodo che permette di settare la coordinata x
+     * @param n 
+     */
     public void setCoordinateX(int n) {
 	coordinateX = n;
     }
-	
+    /**
+     * Metodo che permette di ottenere la coordinata X
+     * @return 
+     */
     public int getCoordinateX() {
 	return coordinateX;
     }
-
+    /**
+     * Metodo che disegna l'immagine utilizzando le coordinate x e y
+     * @param g 
+     */
     public void paint(Graphics g) {
-	g.drawImage(immagine,  coordinateX,  coordinateY, null);
+	g.drawImage(immagine,  coordinateX,  coordinateY, null);//disegna l'immagine in una posizione specifica
     }
 }
